@@ -16,9 +16,9 @@ router.post("/checkout", async ({ body: { formData } }, res) => {
         counter: formData.counter,
       });
 
-      await newOrder.save();
-
-      res.status(200).json({ message: true });
+      const order = await newOrder.save();
+      
+      res.status(200).json({ message: order._id });
     }
   } catch (error) {
     res.status(400).json({ message: "error" });
